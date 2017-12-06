@@ -1,0 +1,40 @@
+<script src="static/js/vue.js"></script>
+<script src="static/js/vue-resource.min.js"></script>
+
+<title> Hello, Vue.js!</title>
+<body>
+<div id="app-2">
+	<ol>
+    	<li v-for="mes in message">
+      		<span v-text="mes.id"></span>
+      		<span v-text="mes.title"></span>
+      		<span v-text="mes.content"></span>
+    	</li>
+  	</ol>
+
+	<button v-on:click="clicked">加载数据</button>
+</div>
+
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#app-2',
+		data:{
+			message: []
+		},
+
+		methods:{
+			clicked:function(){
+				var url="/api/v1.0/info/";
+				var _this = this;
+				this.$http.get(url).then(function(res){
+					_this.message=res.body.infos;
+				})
+			}
+		}
+	})
+</script>
+</body>
+
+
+
+
